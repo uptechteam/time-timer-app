@@ -11,3 +11,7 @@ web-build/
 
 # macOS
 .DS_Store
+/.idea/.gitignore
+/.idea/modules.xml
+/.idea/time-timer-uptech.iml
+/.idea/vcs.xml
