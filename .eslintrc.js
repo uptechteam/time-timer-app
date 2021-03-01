@@ -1,0 +1,56 @@
+module.exports = {
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'airbnb',
+    '@react-native-community',
+    'plugin:prettier/recommended',
+    'prettier',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+  plugins: ['react', 'react-native', 'react-hooks', 'prettier'],
+  env: {
+    es6: true,
+    browser: true,
+    jest: true,
+    'react-native/react-native': true,
+  },
+  settings: {
+    'import/resolver': {
+      'babel-module': {},
+    },
+  },
+  rules: {
+    'no-use-before-define': 'off',
+    'react/jsx-filename-extension': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'comma-dangle': 'off',
+    'padded-blocks': 'off',
+    'arrow-body-style': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-native/no-unused-styles': 2,
+    'react-native/split-platform-components': 2,
+    'react-native/no-single-element-style-arrays': 2,
+    'react-native/no-inline-styles': 'off',
+    'prettier/prettier': 'error',
+    'jsx-quotes': ['error', 'prefer-single'],
+    'no-shadow': 'off',
+    'import/prefer-default-export': 'off',
+    'react/no-unescaped-entities': 'off',
+    'import/extensions': 'off',
+    'prefer-destructuring': [
+      'error',
+      {
+        array: false,
+        object: true,
+      },
+    ],
+    'max-lines': ['warn', { max: 500, skipComments: true, skipBlankLines: true }],
+  },
+  ignorePatterns: ['node_modules/'],
+};
