@@ -1,27 +1,32 @@
 import { Text, View, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import Timer from 'utils/timer';
 import styles from './HomeScreenStyles';
 
+
 const HomeScreen: React.FC = () => {
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState('00:59');
+  const timeInMilliseconds = ( Number(time.split(':')[0])*60 + Number(time.split(':')[1]) ) * 1000;
 
-  const repeater = (origin: number) => {
-    const sec = 60 - Math.floor((new Date().getTime() - origin) / 1000);
-    console.log(sec);
+  const repeater = (currentRealTime: number) => {
 
-    setTime(sec);
+
+    const seconds =  Math.floor(timeInMilliseconds - (new Date().getTime() - currentRealTime));
+    console.log(seconds);
+
+    const formattedTime = new Date(seconds).toISOString().substr(14, 5);
+
+    setTime(formattedTime);
   };
 
-  const runTimer = (timer: number) => {
-    const origin = new Date().getTime();
-    Timer(
-      timer,
-      60,
-      () => repeater(origin),
-      () => repeater(origin),
-    );
+  const final = () => {
+    console.log('stopped');
   };
+
+  const timerRef = useRef(Timer(
+      repeater,
+      final,
+  ));
 
   return (
     <View style={styles.container}>
@@ -29,8 +34,11 @@ const HomeScreen: React.FC = () => {
         <Text>{time}</Text>
       </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity onPress={() => runTimer(1000)}>
+        <TouchableOpacity onPress={() => timerRef.current.starTimer(timeInMilliseconds / 1000)}>
           <Text>Start Timer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => timerRef.current.stopTimer()}>
+          <Text>Stop Timer</Text>
         </TouchableOpacity>
       </View>
     </View>
