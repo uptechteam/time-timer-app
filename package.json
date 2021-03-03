@@ -18,6 +18,7 @@
     "@react-navigation/bottom-tabs": "5.11.2",
     "@react-navigation/native": "~5.8.10",
     "@react-navigation/stack": "~5.12.8",
+    "@shopify/restyle": "^1.4.0",
     "expo": "~40.0.0",
     "expo-asset": "~8.2.1",
     "expo-constants": "~9.3.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@expo/metro-config": "^0.1.56",
     "@react-native-community/eslint-config": "^1.0.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",

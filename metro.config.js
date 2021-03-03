@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-extraneous-dependencies
-const { getDefaultConfig } = require('metro-config');
+/* eslint-disable import/no-extraneous-dependencies,@typescript-eslint/no-var-requires */
+const { getDefaultConfig } = require('@expo/metro-config');
 
 module.exports = (async () => {
   const {

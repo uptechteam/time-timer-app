@@ -12,7 +12,6 @@
     "paths": {
       "*": ["src/*"],
     },
-    "include": ["src/svgModule.d.ts"]
-  }
+  },
 }
 

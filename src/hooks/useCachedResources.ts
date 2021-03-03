@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
@@ -13,10 +14,9 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          // eslint-disable-next-line global-require
-          'poppins-regular': require('assets/fonts/Poppins-Regular.ttf'),
-          'poppins-bold': require('assets/fonts/Poppins-Bold.ttf'),
-          'poppins-semiBold': require('assets/fonts/Poppins-SemiBold.ttf'),
+          'Poppins-Regular': require('assets/fonts/Poppins-Regular.ttf'),
+          'Poppins-Bold': require('assets/fonts/Poppins-Bold.ttf'),
+          'Poppins-SemiBold': require('assets/fonts/Poppins-SemiBold.ttf'),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

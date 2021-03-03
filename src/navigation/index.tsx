@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import { ThemeProvider } from '@shopify/restyle';
+import theme from 'theme/globalTheme';
 
 import { RootStackParamList } from 'models/types';
 import MainStackNavigator from 'navigation/MainStackNavigator';
@@ -8,7 +10,9 @@ import MainStackNavigator from 'navigation/MainStackNavigator';
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <ThemeProvider theme={theme}>
+        <RootNavigator />
+      </ThemeProvider>
     </NavigationContainer>
   );
 }

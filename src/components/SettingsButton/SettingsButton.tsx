@@ -4,8 +4,6 @@ import SettingsIcon from 'assets/svg/settings-icon.svg';
 import { NavigationProps } from 'models/types';
 import styles from './SettingsButtonStyles';
 
-
-
 const SettingsButton: React.FC<NavigationProps> = ({ navigation }) => {
   return (
     <TouchableOpacity

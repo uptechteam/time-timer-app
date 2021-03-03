@@ -12,7 +12,7 @@ const Timer = (repeater: (currentSeconds: number) => void, final: () => void) =>
     maxCounter = 0;
   };
 
-  const starTimer = ( timerInitNum: number) => {
+  const starTimer = (timerInitNum: number) => {
     maxCounter = timerInitNum / tick;
     currentSeconds = timerInitNum;
 
@@ -23,12 +23,11 @@ const Timer = (repeater: (currentSeconds: number) => void, final: () => void) =>
     const timerStart = new Date().getTime();
 
     setTimeout(() => {
-
       if (counter < maxCounter) {
         const fix = new Date().getTime() - timerStart - tick; // make timeout more accurate
         timerCycle(t - fix);
         counter++;
-        currentSeconds = currentSeconds - tick;
+        currentSeconds -= tick;
 
         repeater(currentSeconds);
       } else {
@@ -39,9 +38,8 @@ const Timer = (repeater: (currentSeconds: number) => void, final: () => void) =>
 
   return {
     stopTimer,
-    starTimer
+    starTimer,
   };
 };
-
 
 export default Timer;
