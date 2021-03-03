@@ -4,32 +4,30 @@
 
 const Timer = (repeater: (currentSeconds: number) => void, final: () => void) => {
   const tick = 1000;
-  let counter = 0;
-  let maxCounter = 0;
-  let currentSeconds = 0;
+  let isRunning = false;
+  let timerStartAt = 0;
 
   const stopTimer = () => {
-    maxCounter = 0;
+    isRunning = false;
   };
 
-  const starTimer = (timerInitNum: number) => {
-    maxCounter = timerInitNum / tick;
-    currentSeconds = timerInitNum;
+  const starTimer = () => {
+    timerStartAt = new Date().getTime();
+
+    isRunning = true;
 
     timerCycle(tick);
   };
 
   const timerCycle = (t: number) => {
-    const timerStart = new Date().getTime();
+    const currentCycleStartAt = new Date().getTime();
 
     setTimeout(() => {
-      if (counter < maxCounter) {
-        const fix = new Date().getTime() - timerStart - tick; // make timeout more accurate
+      if (isRunning) {
+        const fix = new Date().getTime() - currentCycleStartAt - tick; // make timeout more accurate
         timerCycle(t - fix);
-        counter++;
-        currentSeconds -= tick;
 
-        repeater(currentSeconds);
+        repeater(timerStartAt);
       } else {
         final();
       }
