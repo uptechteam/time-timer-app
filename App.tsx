@@ -1,4 +1,6 @@
 import React from 'react';
+import store from 'store';
+import { Provider } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -12,10 +14,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation />
-        <StatusBar />
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <Navigation />
+          <StatusBar />
+        </SafeAreaProvider>
+      </Provider>
     );
   }
 }
