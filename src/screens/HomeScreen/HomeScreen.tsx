@@ -3,16 +3,19 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'hooks/reduxHooks';
 import Timer from 'utils/timer';
 import DigitalTimer from 'components/DigitalTimer';
+import AnalogTimer from 'components/AnalogTimer';
 import { timerStart, timerPause, timerReset, timerContinue } from 'store/timerSlice';
 import styles from './HomeScreenStyles';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const timerIsRunning = useAppSelector((state) => state.timer.isRunning);
+  const timerStartAt = useAppSelector((state) => state.timer.startTime);
+  const timerDuration = useAppSelector((state) => state.timer.duration);
   const timerPausedAt = useAppSelector((state) => state.timer.pausedAt);
   const timerEndTime = useAppSelector((state) => state.timer.endTime);
 
-  const [duration, setDuration] = useState(5000);
+  const [duration, setDuration] = useState(300000);
   const [formattedTime, setFormattedTime] = useState('00:00');
 
   const timerRepeater = useCallback(() => {
@@ -71,7 +74,7 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View
-        style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+        style={{ flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
       >
         <TextInput
           style={{ flex: 1, height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -82,7 +85,15 @@ const HomeScreen: React.FC = () => {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <DigitalTimer time={formattedTime} />
       </View>
-      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+        <AnalogTimer
+          timerIsRunning={timerIsRunning}
+          timerEndTime={timerEndTime}
+          timerStartAt={timerStartAt}
+          timerDuration={timerDuration}
+        />
+      </View>
+      <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
         <TouchableOpacity onPress={() => startTimer()}>
           <Text>Start </Text>
         </TouchableOpacity>
