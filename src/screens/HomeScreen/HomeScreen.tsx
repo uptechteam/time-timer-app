@@ -15,7 +15,7 @@ const HomeScreen: React.FC = () => {
   const timerPausedAt = useAppSelector((state) => state.timer.pausedAt);
   const timerEndTime = useAppSelector((state) => state.timer.endTime);
 
-  const [duration, setDuration] = useState(300000);
+  const [duration, setDuration] = useState(0);
   const [formattedTime, setFormattedTime] = useState('00:00');
 
   const timerRepeater = useCallback(() => {
@@ -23,8 +23,9 @@ const HomeScreen: React.FC = () => {
     // rounding time diff to fix milliseconds calculation for visual representation
     const timeDiff = Math.round((timerEndTime - currentTime) / 1000) * 1000;
 
-    console.log(timeDiff);
-    setFormattedTime(new Date(timeDiff).toISOString().substr(14, 5));
+    if (timeDiff < 3600000) {
+      setFormattedTime(new Date(timeDiff).toISOString().substr(14, 5));
+    }
 
     if (timeDiff < 1000) {
       // timeDiff less than 1 second - timer finished
@@ -64,33 +65,30 @@ const HomeScreen: React.FC = () => {
 
   const resetTimer = () => {
     dispatch(timerReset());
-    setFormattedTime(new Date(duration).toISOString().substr(14, 5));
+    setDuration(0);
   };
 
   useEffect(() => {
-    setFormattedTime(new Date(duration).toISOString().substr(14, 5));
+    if (duration === 3600000) {
+      setFormattedTime('60:00');
+    } else {
+      setFormattedTime(new Date(duration).toISOString().substr(14, 5));
+    }
   }, [duration]);
 
   return (
     <View style={styles.container}>
-      <View
-        style={{ flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <TextInput
-          style={{ flex: 1, height: 40, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={(text) => setDuration(parseInt(text))}
-          value={`${duration}`}
-        />
-      </View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <DigitalTimer time={formattedTime} />
       </View>
       <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
         <AnalogTimer
+          timerPausedAt={timerPausedAt}
           timerIsRunning={timerIsRunning}
           timerEndTime={timerEndTime}
           timerStartAt={timerStartAt}
           timerDuration={timerDuration}
+          setDuration={setDuration}
         />
       </View>
       <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
