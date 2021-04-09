@@ -81,7 +81,7 @@ const HomeScreen: React.FC = () => {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <DigitalTimer time={formattedTime} />
       </View>
-      <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
         <AnalogTimer
           timerPausedAt={timerPausedAt}
           timerIsRunning={timerIsRunning}

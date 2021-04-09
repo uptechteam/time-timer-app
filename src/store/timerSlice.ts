@@ -37,6 +37,7 @@ export const timerSlice = createSlice({
       const newEndTime = newStartTime + newDuration;
 
       state.isRunning = true;
+      state.pausedAt = 0;
       state.startTime = newStartTime;
       state.duration = newDuration;
       state.endTime = newEndTime;

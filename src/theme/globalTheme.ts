@@ -24,7 +24,6 @@ const theme = createTheme({
   textVariants: {
     digitalTimer: {
       fontFamily: 'Poppins-Bold',
-      fontWeight: '700',
       fontSize: 30,
       lineHeight: 34,
       color: 'customBlack',
