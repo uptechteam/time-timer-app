@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet, View, Text } from 'react-native';
 import Svg, { Circle, Defs, G, Line, LinearGradient, Stop } from 'react-native-svg';
-import { BlurView } from 'expo-blur';
 import Animated, {
   Easing,
   interpolate,
@@ -11,7 +10,6 @@ import Animated, {
   Extrapolate,
   useAnimatedGestureHandler,
   runOnJS,
-  useDerivedValue,
 } from 'react-native-reanimated';
 import {
   PanGestureHandler,
@@ -33,7 +31,6 @@ const r = (size - strokeWidth) / 2;
 const cx = size / 2;
 const cy = size / 2;
 const circumference = 2 * PI * r;
-const timerCenter = halfWidth;
 const oneHourInMs = 3600000;
 const fifteenMinutesInMs = 900000;
 const tenSecondsInMs = 10000;
@@ -58,41 +55,42 @@ const AnalogTimer = ({
   timerStartAt,
   timerDuration,
 }: CircularProgressProps) => {
-  const duration = useSharedValue(timerDuration);
+  const durationShared = useSharedValue(timerDuration);
   const velocity = useSharedValue(0);
 
   const animatedProps = useAnimatedProps(() => {
-    // console.log(`duration: ${duration.value}`);
+    // console.log(`durationShared: ${durationShared.value}`);
     // console.log(`timerIsRunning: ${timerIsRunning}`);
     // console.log(`timerPausedAt: ${timerPausedAt}`);
 
     const isRunning = timerIsRunning && timerPausedAt === 0;
 
     const progress = interpolate(
-      isRunning ? 0 : duration.value,
+      isRunning ? 0 : durationShared.value,
       [0, oneHourInMs],
       [2 * PI * r, 0],
       Extrapolate.CLAMP,
     );
 
-    const durationWithVelocity =
-      (Math.floor(progress - duration.value) / -tenSecondsInMs / velocity.value) * 100;
-    console.log(durationWithVelocity);
-    let strokeDashoffset;
-    if (isRunning) {
-      strokeDashoffset = -progress + tenSecondsInMs;
-    } else {
-      strokeDashoffset = withTiming(-progress, {
-        // duration: isRunning ? duration.value + tenSecondsInMs : 150,
-        duration: 150,
-        easing: Easing.linear,
-      });
-    }
+    /* const durationWithVelocity =
+      (Math.floor(progress - durationShared.value) / -tenSecondsInMs / velocity.value) * 100;
+    console.log(durationWithVelocity); */
+
+    const strokeDashoffset = withTiming(-progress, {
+      duration: isRunning ? durationShared.value + tenSecondsInMs : 150,
+      easing: Easing.linear,
+    });
 
     return {
       strokeDashoffset,
     };
-  }, [duration.value, timerIsRunning, timerPausedAt]);
+  }, [durationShared.value, timerIsRunning, timerPausedAt]);
+
+  /*  const animatedDigitalTimerProps = useAnimatedProps(() => {
+    return {
+      time: durationShared.value,
+    };
+  }, [durationShared.value]); */
 
   /*
    *
@@ -107,7 +105,7 @@ const AnalogTimer = ({
     'worklet';
 
     const { x, y, velocityX, velocityY } = event;
-    const velocityXY = Math.floor(Math.sqrt(velocityX ** 2 + velocityY ** 2));
+    // const velocityXY = Math.floor(Math.sqrt(velocityX ** 2 + velocityY ** 2));
     // console.log(velocityXY);
 
     // moving to Cartesian coordinate system
@@ -143,9 +141,9 @@ const AnalogTimer = ({
     }
 
     if (milliseconds % 60000 === 0) {
-      duration.value = milliseconds;
-      velocity.value = velocityXY;
-      // runOnJS(setDuration)(milliseconds);
+      durationShared.value = milliseconds;
+      // velocity.value = velocityXY;
+      runOnJS(setDuration)(milliseconds);
     }
   }
 

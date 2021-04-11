@@ -1,10 +1,11 @@
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'hooks/reduxHooks';
 import Timer from 'utils/timer';
 import DigitalTimer from 'components/DigitalTimer';
 import AnalogTimer from 'components/AnalogTimer';
 import { timerStart, timerPause, timerReset, timerContinue } from 'store/timerSlice';
+import ControlButton from 'components/ControlButton';
 import styles from './HomeScreenStyles';
 
 const HomeScreen: React.FC = () => {
@@ -91,19 +92,59 @@ const HomeScreen: React.FC = () => {
           setDuration={setDuration}
         />
       </View>
-      <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
-        <TouchableOpacity onPress={() => startTimer()}>
-          <Text>Start </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => pauseTimer()}>
-          <Text>Pause </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => continueTimer()}>
-          <Text>Continue </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => resetTimer()}>
-          <Text>Reset </Text>
-        </TouchableOpacity>
+      <View
+        style={{
+          flex: 2,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'flex-start',
+          }}
+        >
+          {!timerStartAt && (
+            <ControlButton
+              onPress={() => startTimer()}
+              title='Start'
+              type='full'
+              borderType='full'
+              isActive={!!duration}
+            />
+          )}
+
+          {!!timerStartAt && (
+            <ControlButton
+              onPress={() => resetTimer()}
+              title='Reset'
+              type='outline'
+              borderType='half'
+            />
+          )}
+
+          {!!timerStartAt && timerIsRunning && (
+            <ControlButton
+              onPress={() => pauseTimer()}
+              title='Pause'
+              type='outline'
+              borderType='full'
+            />
+          )}
+
+          {!!timerStartAt && !timerIsRunning && (
+            <ControlButton
+              onPress={() => continueTimer()}
+              title='Continue'
+              type='outline'
+              borderType='full'
+            />
+          )}
+        </View>
       </View>
     </View>
   );

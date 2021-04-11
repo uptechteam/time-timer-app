@@ -15,3 +15,11 @@ export type NavigationProps = {
 export type DigitalTimerProps = {
   time: string;
 };
+
+export type ControlButtonProps = {
+  type: 'full' | 'outline';
+  borderType: 'full' | 'half';
+  isActive?: boolean;
+  title: string;
+  onPress: () => void;
+};
