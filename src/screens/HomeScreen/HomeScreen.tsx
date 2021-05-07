@@ -1,7 +1,8 @@
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'hooks/reduxHooks';
 import Timer from 'utils/timer';
+import setNotification from 'utils/notifications';
 import DigitalTimer from 'components/DigitalTimer';
 import AnalogTimer from 'components/AnalogTimer';
 import { timerStart, timerPause, timerReset, timerContinue } from 'store/timerSlice';
@@ -25,7 +26,8 @@ const HomeScreen: React.FC = () => {
     const timeDiff = Math.round((timerEndTime - currentTime) / 1000) * 1000;
 
     if (timeDiff < 3600000) {
-      setFormattedTime(new Date(timeDiff).toISOString().substr(14, 5));
+      const time = new Date(timeDiff).toISOString().substr(14, 5);
+      setFormattedTime(time.replace(':', ' : '));
     }
 
     if (timeDiff < 1000) {
@@ -52,6 +54,7 @@ const HomeScreen: React.FC = () => {
   const startTimer = () => {
     const currentTime = new Date().getTime();
     dispatch(timerStart({ startTime: currentTime, duration }));
+    setNotification(duration);
   };
 
   const pauseTimer = () => {
@@ -71,9 +74,10 @@ const HomeScreen: React.FC = () => {
 
   useEffect(() => {
     if (duration === 3600000) {
-      setFormattedTime('60:00');
+      setFormattedTime('60 : 00');
     } else {
-      setFormattedTime(new Date(duration).toISOString().substr(14, 5));
+      const time = new Date(duration).toISOString().substr(14, 5);
+      setFormattedTime(time.replace(':', ' : '));
     }
   }, [duration]);
 

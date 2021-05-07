@@ -6,6 +6,7 @@ const palette = {
   customBlack: '#24282F',
   gray: '#BDBFC1',
   gray1: '#E9EAEA',
+  orange: '#FE5722',
 };
 
 const theme = createTheme({
@@ -17,6 +18,7 @@ const theme = createTheme({
     backgroundInactive: palette.gray,
     borderActive: palette.customBlack,
     borderInactive: palette.gray1,
+    orange: palette.orange,
   },
   spacing: {
     s: 8,
@@ -29,6 +31,31 @@ const theme = createTheme({
     tablet: 768,
   },
   textVariants: {
+    thin: {
+      fontFamily: 'Poppins-Regular',
+      fontSize: 15,
+      lineHeight: 22,
+      color: 'customBlack',
+      opacity: 0.7,
+    },
+    regular: {
+      fontFamily: 'Poppins-Regular',
+      fontSize: 15,
+      lineHeight: 22,
+      color: 'customBlack',
+    },
+    bold: {
+      fontFamily: 'Poppins-Bold',
+      fontSize: 15,
+      lineHeight: 22,
+      color: 'customBlack',
+    },
+    semiBold: {
+      fontFamily: 'Poppins-SemiBold',
+      fontSize: 15,
+      lineHeight: 22,
+      color: 'customBlack',
+    },
     digitalTimer: {
       fontFamily: 'Poppins-Bold',
       fontSize: 30,

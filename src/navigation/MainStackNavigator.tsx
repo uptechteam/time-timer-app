@@ -5,18 +5,28 @@ import SettingsButton from 'components/SettingsButton';
 import HomeScreen from 'screens/HomeScreen';
 import SettingsScreen from 'screens/SettingsScreen';
 import { RootStackParamList } from 'models/types';
+import BackIcon from 'assets/svg/back-icon.svg';
 
 const MainStack = createStackNavigator<RootStackParamList>();
 
 const MainStackNavigator: React.FC = () => {
   return (
-    <MainStack.Navigator initialRouteName='Home'>
+    <MainStack.Navigator
+      initialRouteName='Home'
+      screenOptions={() => ({
+        headerTitleAlign: 'center',
+        headerStyle: {
+          borderBottomWidth: 0,
+          elevation: 0,
+          shadowColor: 'transparent',
+        },
+        headerTitleStyle: { fontFamily: 'Poppins-SemiBold', fontSize: 17 },
+      })}
+    >
       <MainStack.Screen
         name='Home'
         component={HomeScreen}
         options={({ navigation }) => ({
-          headerStyle: { shadowColor: 'transparent' },
-          headerTitleStyle: { fontFamily: 'Poppins-SemiBold', fontSize: 17 },
           title: 'Timer',
           headerRight: () => <SettingsButton navigation={navigation} />,
         })}
@@ -25,8 +35,11 @@ const MainStackNavigator: React.FC = () => {
         name='Settings'
         component={SettingsScreen}
         options={() => ({
-          headerStyle: { shadowColor: 'transparent' },
-          headerTitleStyle: { fontFamily: 'Poppins-SemiBold', fontSize: 17 },
+          headerBackImage: () => <BackIcon />,
+          headerLeftContainerStyle: {
+            marginLeft: 24,
+          },
+          headerBackTitleVisible: false,
         })}
       />
     </MainStack.Navigator>

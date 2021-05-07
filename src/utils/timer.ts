@@ -1,6 +1,4 @@
 // tick - time in ms for each tick
-// maxCounter - how many times to run tick
-// For example: timer = 1000, maxCounter = 60 - a minute timer that will tick every second
 
 const Timer = (repeater: () => void) => {
   const tick = 1000;

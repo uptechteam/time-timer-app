@@ -23,3 +23,11 @@ export type ControlButtonProps = {
   title: string;
   onPress: () => void;
 };
+
+export type SettingsListItem = {
+  title: string;
+  type: 'switch' | 'arrow';
+  id: string;
+};
+
+export type SettingsListItems = Array<SettingsListItem>;
