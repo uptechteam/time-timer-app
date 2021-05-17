@@ -1,9 +1,8 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll"
@@ -33,14 +32,16 @@
     "expo-web-browser": "~8.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native": "~0.63.4",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-reanimated": "2.0.0-rc.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.0",
     "react-native-svg": "^12.1.0",
     "react-native-web": "~0.13.12",
-    "react-redux": "^7.2.2"
+    "react-redux": "^7.2.2",
+    "expo-updates": "~0.4.0",
+    "react-native-unimodules": "~0.12.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
@@ -63,7 +64,12 @@
     "eslint-plugin-react-native": "^3.9.1",
     "jest-expo": "~40.0.0",
     "react-native-svg-transformer": "^0.14.3",
-    "typescript": "~4.0.0"
+    "typescript": "~4.0.0",
+    "babel-jest": "~25.2.6",
+    "jest": "~25.2.6",
+    "react-test-renderer": "~16.13.1"
   },
-  "private": true
+  "private": true,
+  "name": "time-timer-uptech",
+  "version": "1.0.0"
 }
