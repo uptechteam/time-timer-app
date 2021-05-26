@@ -56,6 +56,8 @@ PODS:
     - React-jsi (= 0.64.1)
     - ReactCommon/turbomodule/core (= 0.64.1)
   - glog (0.3.5)
+  - hermes-engine (0.7.2)
+  - libevent (2.1.12)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -65,6 +67,11 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - RCT-Folly/Futures (2020.01.13.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+    - libevent
   - RCTRequired (0.64.1)
   - RCTTypeSafety (0.64.1):
     - FBLazyVector (= 0.64.1)
@@ -120,6 +127,16 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-jsiexecutor (= 0.64.1)
     - React-jsinspector (= 0.64.1)
+    - React-perflogger (= 0.64.1)
+    - Yoga
+  - React-Core/Hermes (0.64.1):
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2020.01.13.00)
+    - RCT-Folly/Futures
+    - React-cxxreact (= 0.64.1)
+    - React-jsi (= 0.64.1)
+    - React-jsiexecutor (= 0.64.1)
     - React-perflogger (= 0.64.1)
     - Yoga
   - React-Core/RCTActionSheetHeaders (0.64.1):
@@ -393,6 +410,8 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - hermes-engine (~> 0.7.2)
+  - libevent (~> 2.1.12)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -400,6 +419,7 @@ DEPENDENCIES:
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
+  - React-Core/Hermes (from `../node_modules/react-native/`)
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
@@ -442,6 +462,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - hermes-engine
+    - libevent
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -596,6 +618,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 7b423f9e248eae65987838148c36eec1dbfe0b53
   FBReactNativeSpec: 2b1b6bffc5e3fe9287ab6238f78ec9fb2376e475
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  hermes-engine: 7d97ba46a1e29bacf3e3c61ecb2804a5ddd02d4f
+  libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: ec2ebc96b7bfba3ca5c32740f5a0c6a014a274d2
   RCTTypeSafety: 22567f31e67c3e088c7ac23ea46ab6d4779c0ea5
@@ -640,6 +664,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 4c60b43eaf3cb05a164bc9113258a171c18b7bf7
   Yoga: a7de31c64fe738607e7a3803e3f591a4b1df7393
 
-PODFILE CHECKSUM: e233d92c051c36b4a7109326e4e3c423c8b9e1fd
+PODFILE CHECKSUM: 10f7feedbf7f02e317811e3ea2d56510f6d67bf4
 
 COCOAPODS: 1.10.1

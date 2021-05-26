@@ -27,7 +27,7 @@ const SettingsScreen: React.FC = () => {
         setIsVibrate(!isVibrate);
         break;
       case 'Audible':
-        console.log(`isAudible: ${!isAudible}`);
+        console.log(`Audible: ${!isAudible}`);
         setIsAudible(!isAudible);
         break;
       default:
