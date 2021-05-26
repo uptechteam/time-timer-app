@@ -23,9 +23,11 @@ const SettingsScreen: React.FC = () => {
   const toggleSwitch = (type: SettingsListItem['title']) => {
     switch (type) {
       case 'Vibrate':
+        console.log(`Vibrate: ${!isVibrate}`);
         setIsVibrate(!isVibrate);
         break;
       case 'Audible':
+        console.log(`isAudible: ${!isAudible}`);
         setIsAudible(!isAudible);
         break;
       default:
